@@ -1,13 +1,17 @@
-import { React, useState} from 'react'
+import { React, useState, useEffect} from 'react'
 
 export default function TripList() {
     const [trips, setTrips] = useState([])
 
+    useEffect(() => {   // the first part is the function
+        fetch('http://localhost:3001/trips')
+        .then(response => response.json())
+        .then(json => setTrips(json))
+    }, []) // the second part in the square brackets is the dependency array to run when a state changes
+
     console.log(trips);
 
-    fetch('http://localhost:3000/trips')
-    .then(response => response.json())
-    .then(json => setTrips(json));
+  
 
   return (
     <div>
