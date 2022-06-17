@@ -5,7 +5,7 @@
 
 
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 
 //import the useFetch hook 
@@ -21,7 +21,7 @@ export default function TripList() {
     const [url, setUrl] = useState('http://localhost:3000/trips')
 
      // use the useFetch hook instead:
-     const { data: trips } = useFetch(url)
+     const { data: trips, isPending } = useFetch(url)
 
 
 
@@ -43,6 +43,8 @@ export default function TripList() {
   return (
     <div className='trip-list'>
         <h2>TripList</h2>
+        {/* show  loading message with isPending state */}
+        { isPending && <div> Loading trips . . .</div>}
         <ul>
             {trips && trips.map(trip => (
                 <li key={trip.id}>
